@@ -31,6 +31,8 @@ configurations {
 dependencies {
 	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'org.springframework.boot:spring-boot-starter-ws:1.4.6.RELEASE'
+	compile 'wsdl4j:wsdl4j:1.6.3'
 	compile group: 'com.alibaba', name: 'druid', version: '1.0.31'
 	compile 'com.oracle:ojdbc6:11.2.0.3'
 	compile 'org.apache.commons:commons-io:1.3.2'
@@ -39,4 +41,6 @@ dependencies {
 	compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
 	compile 'commons-beanutils:commons-beanutils:20030211.134440'
 	compile 'dom4j:dom4j:1.6.1'
+	compile 'org.apache.poi:poi:3.16'
+	compile 'org.apache.poi:poi-ooxml:3.16'
 }

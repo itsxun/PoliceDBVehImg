@@ -1,5 +1,5 @@
 
-package ws;
+package xin.fallen.ws;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

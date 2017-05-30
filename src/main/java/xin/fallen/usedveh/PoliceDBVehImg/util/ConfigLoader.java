@@ -54,9 +54,10 @@ public class ConfigLoader {
                 }
             }
         } catch (Exception e) {
-            System.out.println("转换中出现异常，原因是：" + e.getMessage());
+            System.out.println("参数导入出现异常，原因是：" + e.getMessage());
             return false;
         }
+        ConfigReader.configDestory();
         return true;
     }
 }

@@ -2,17 +2,15 @@ package xin.fallen.usedveh.PoliceDBVehImg.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import xin.fallen.usedveh.PoliceDBVehImg.config.StaticConfig;
 import xin.fallen.usedveh.PoliceDBVehImg.domain.VehImg;
 import xin.fallen.usedveh.PoliceDBVehImg.mapper.VehImgDao;
 import xin.fallen.usedveh.PoliceDBVehImg.util.Base64Util;
+import xin.fallen.usedveh.PoliceDBVehImg.util.HttpUtil;
 import xin.fallen.usedveh.PoliceDBVehImg.util.JsonResultUtil;
 import xin.fallen.usedveh.PoliceDBVehImg.vo.JsonResult;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -44,4 +42,17 @@ public class VehImgCtrl {
        list=null;
         return JsonResultUtil.resDispatcher(res);
    }
+
+    @RequestMapping("/police-db-pic")
+    public JsonResult getZpByHpzlAndHphmInPoliceDB(String hpzl, String hphm,String token){
+        if(hpzl == null || hphm == null){
+            return JsonResultUtil.resDispatcher("请填写正确的号牌种类和号牌号码",0);
+        }
+        String res=HttpUtil.post(StaticConfig.WSDLREQUSETURL,StaticConfig.WSDLREQUESTBODY.replace("{HPZL}",hpzl).replace("{HPHM}",hphm));
+        if("".equals(res)){
+            return JsonResultUtil.resDispatcher(0);
+        }
+        res=res.substring(res.indexOf("<GetExaminePhoto1Result>")+24,res.indexOf("</GetExaminePhoto1Result>"));
+        return JsonResultUtil.resDispatcher(res.split(","));
+    }
 }

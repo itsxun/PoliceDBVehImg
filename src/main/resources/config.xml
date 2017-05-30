@@ -21,6 +21,26 @@
     </excel_title>
 
     <excel_gen_path>
-        D:\git\PoliceDBVehImg\src\main\resources\usedveh\tmp
+        C:\Users\itsxu\Desktop\
     </excel_gen_path>
+
+    <wsdl_request_body>
+        <![CDATA[
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+            <soapenv:Header/>
+            <soapenv:Body>
+                <tem:GetExaminePhoto1>
+                    <!--号牌种类-->
+                    <tem:plateType>{HPZL}</tem:plateType>
+                    <!--号牌号码-->
+                    <tem:plateNo>{HPHM}</tem:plateNo>
+                </tem:GetExaminePhoto1>
+            </soapenv:Body>
+        </soapenv:Envelope>
+        ]]>
+    </wsdl_request_body>
+
+    <wsdl_requeset_url>
+        http://10.35.139.118:8084/CTService2.asmx?wsdl
+    </wsdl_requeset_url>
 </config>

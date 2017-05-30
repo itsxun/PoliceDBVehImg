@@ -1,5 +1,5 @@
 
-package we;
+package xin.fallen.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,16 +9,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type的 Java 类。
+ * <p>anonymous complex type?? Java ??
  * 
- * <p>以下模式片段指定包含在此类中的预期内容。
+ * <p>??????????????????????械?????????
  * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="GetWeatherResult" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="GetExaminePhoto1Result" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getWeatherResult"
+    "getExaminePhoto1Result"
 })
-@XmlRootElement(name = "GetWeatherResponse")
-public class GetWeatherResponse {
+@XmlRootElement(name = "GetExaminePhoto1Response")
+public class GetExaminePhoto1Response {
 
-    @XmlElement(name = "GetWeatherResult")
-    protected String getWeatherResult;
+    @XmlElement(name = "GetExaminePhoto1Result")
+    protected String getExaminePhoto1Result;
 
     /**
-     * 获取getWeatherResult属性的值。
+     * ???getExaminePhoto1Result????????
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getGetWeatherResult() {
-        return getWeatherResult;
+    public String getGetExaminePhoto1Result() {
+        return getExaminePhoto1Result;
     }
 
     /**
-     * 设置getWeatherResult属性的值。
+     * ????getExaminePhoto1Result????????
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setGetWeatherResult(String value) {
-        this.getWeatherResult = value;
+    public void setGetExaminePhoto1Result(String value) {
+        this.getExaminePhoto1Result = value;
     }
 
 }

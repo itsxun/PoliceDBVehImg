@@ -1,5 +1,6 @@
 package xin.fallen.usedveh.PoliceDBVehImg.controller;
 
+import com.google.gson.Gson;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,6 @@ import xin.fallen.usedveh.PoliceDBVehImg.vo.JsonResult;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -32,19 +32,23 @@ import java.util.UUID;
 @RequestMapping
 public class CompositeQueryCtrl {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-    private Logger log= LoggerFactory.getLogger(this.getClass());
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     private CompositeQuery compositeQuery;
 
     @RequestMapping("/excel-export")
-    public JsonResult excelExport(String[] rowNums, String title, String[] cellNames) {
-        List<Object> objs = compositeQuery.fuzzySelect(cellNames == null ? StaticConfig.COLUMNSNAME.split(",") : cellNames, StaticConfig.TABLENAME, rowNums);
+    public JsonResult excelExport(String[] cellNames, String[] rowNums, String title) {
+        if (cellNames == null || cellNames.length == 0) {
+            cellNames = StaticConfig.COLUMNSNAME.split(",");
+        }
 
-        Workbook wb = XlsxWriter.write(title, cellNames == null ? Arrays.asList(StaticConfig.COLUMNSNAME.split(",")) : Arrays.asList(cellNames), objs);
+        List depts = compositeQuery.fuzzySelect(cellNames, StaticConfig.TABLENAME, rowNums == null || rowNums.length == 0 ? new String[]{"SB029", "SB030", "SB031"} : rowNums);
 
-        if(wb==null){
-            return JsonResultUtil.resDispatcher("文件生成异常",0);
+        Workbook wb = XlsxWriter.write(title, cellNames == null ? Arrays.asList(StaticConfig.COLUMNSNAME.split(",")) : Arrays.asList(cellNames), depts);
+        if (wb == null) {
+            log.error("excel文件生成异常");
+            return JsonResultUtil.resDispatcher("excel文件生成异常", 0);
         }
         Date date = new Date();
         File file = new File(StaticConfig.EXCELGENPATH + File.separator + sdf.format(date));
@@ -55,9 +59,10 @@ public class CompositeQueryCtrl {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(file);
-                wb.write(out);
+            wb.write(out);
         } catch (Exception e) {
-            return null;
+            log.error("excel内容写入文件失败");
+            return JsonResultUtil.resDispatcher("excel内容写入文件失败", 0);
         } finally {
             if (out != null) {
                 try {
@@ -67,6 +72,6 @@ public class CompositeQueryCtrl {
                 }
             }
         }
-        return JsonResultUtil.resDispatcher(file.getAbsolutePath(),1);
+        return JsonResultUtil.resDispatcher(file.getAbsolutePath(), 1);
     }
 }

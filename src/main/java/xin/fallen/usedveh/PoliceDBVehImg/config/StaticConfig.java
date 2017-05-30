@@ -25,5 +25,11 @@ public class StaticConfig {
     @Alias("excel_gen_path")
     public static String EXCELGENPATH;
 
+    @Alias("wsdl_request_body")
+    public static String WSDLREQUESTBODY;
+
+    @Alias("wsdl_requeset_url")
+    public static String WSDLREQUSETURL;
+
     public static Object objX;
 }

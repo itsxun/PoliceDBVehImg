@@ -1,5 +1,5 @@
 
-package ws;
+package xin.fallen.ws;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -32,8 +32,8 @@ public interface CTService2Soap {
      */
     @WebMethod(operationName = "GetExaminePhoto1", action = "http://tempuri.org/GetExaminePhoto1")
     @WebResult(name = "GetExaminePhoto1Result", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetExaminePhoto1", targetNamespace = "http://tempuri.org/", className = "ws.GetExaminePhoto1")
-    @ResponseWrapper(localName = "GetExaminePhoto1Response", targetNamespace = "http://tempuri.org/", className = "ws.GetExaminePhoto1Response")
+    @RequestWrapper(localName = "GetExaminePhoto1", targetNamespace = "http://tempuri.org/", className = "GetExaminePhoto1")
+    @ResponseWrapper(localName = "GetExaminePhoto1Response", targetNamespace = "http://tempuri.org/", className = "GetExaminePhoto1Response")
     public String getExaminePhoto1(
         @WebParam(name = "plateType", targetNamespace = "http://tempuri.org/")
         String plateType,

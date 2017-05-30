@@ -1,5 +1,5 @@
 
-package ws;
+package xin.fallen.ws;
 
 import java.net.MalformedURLException;
 import java.net.URL;

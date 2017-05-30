@@ -1,4 +1,4 @@
-package xin.fallen;
+package xin.fallen.usedveh.PoliceDBVehImg;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

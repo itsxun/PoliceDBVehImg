@@ -1,5 +1,6 @@
 package xin.fallen.usedveh.PoliceDBVehImg.config;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
 /**
@@ -9,20 +10,24 @@ import org.apache.ibatis.jdbc.SQL;
  * Usage:
  */
 public class SqlBuilder {
-    public String dynamicSqlBuilder(final String[] columnsName,final  String tableName,final String[] primaryKey) {
-        return new SQL(){{
-            SELECT(columnsName);
+    public String dynamicSqlBuilder(@Param("columnsName")final String[] columnsName, @Param("tableName") final String tableName,@Param("pks") final String[] primaryKey) {
+        SQL sql = new SQL() {{
+            for (String s : columnsName) {
+                SELECT(s);
+            }
             FROM(tableName);
-            WHERE(StaticConfig.PRIMARYKEY+" in "+array2String(primaryKey));
-        }}.toString();
+            WHERE(StaticConfig.PRIMARYKEY + " in " + array2String(primaryKey));
+        }};
+        System.out.println("生成的动态SQL为："+sql.toString());
+        return sql.toString();
     }
 
-    public static String array2String(String[] strs){
-        StringBuilder sb=new StringBuilder();
+    public static String array2String(String[] strs) {
+        StringBuilder sb = new StringBuilder();
         sb.append("(");
-        for(String s :strs){
-            sb.append("\"").append(s).append("\",");
+        for (String s : strs) {
+            sb.append("'").append(s).append("',");
         }
-     return sb.deleteCharAt(sb.length()-1).append(")").toString();
+        return sb.deleteCharAt(sb.length() - 1).append(")").toString();
     }
 }

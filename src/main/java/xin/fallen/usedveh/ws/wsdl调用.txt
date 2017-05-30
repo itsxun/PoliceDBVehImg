@@ -1,0 +1,109 @@
+package com.chq.dao;
+
+import java.io.IOException;
+import org.apache.http.HttpHost;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+
+public class TestWsdl {
+  
+  private static TestWsdl dao = null;
+  //private Logger log = LoggerFactory.getLogger(this.getClass().getName());
+  
+  public static synchronized TestWsdl getInstance(){
+    return (dao==null)?new TestWsdl():dao;
+  }
+  
+  //构造
+  public TestWsdl(){
+    
+  }
+  
+  public static void main(String[] args) {  
+    //传递的 XML 参数
+    String xml = "";
+    xml = xml+"<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://ws.flaginfo.com.cn\">";
+    xml = xml+"   <soapenv:Header/>";
+    xml = xml+"   <soapenv:Body>";
+    xml = xml+"      <ws:Sms>";
+    xml = xml+"         <ws:in0>219248</ws:in0>";
+    xml = xml+"         <ws:in1>sz_lpwl</ws:in1>";
+    xml = xml+"         <ws:in2>luopan6661166</ws:in2>";
+    xml = xml+"         <ws:in3><![CDATA[尊敬的客户：您好！员工罗盘BBC于2015-06-02 22:30:37填写的 国内出票 申请单需要您审批]]></ws:in3>";
+    xml = xml+"         <ws:in4>17712613261</ws:in4>";
+    xml = xml+"         <ws:in5>20150311111111999000</ws:in5>";
+    xml = xml+"         <ws:in6>20090901010101</ws:in6>";
+    xml = xml+"         <ws:in7>1</ws:in7>";
+    xml = xml+"         <ws:in8></ws:in8>";
+    xml = xml+"         <ws:in9></ws:in9>";
+    xml = xml+"         <ws:in10></ws:in10>";
+    xml = xml+"      </ws:Sms>";
+    xml = xml+"   </soapenv:Body>";
+    xml = xml+"</soapenv:Envelope>";
+    
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        //WSDL地址
+        HttpPost httppost = new HttpPost("http://js.ums86.com:8899/sms_hb/services/Sms?wsdl");    
+        
+        //依次是代理地址，代理端口号，协议类型
+        HttpHost proxy = new HttpHost("180.97.80.177", 8818, "http");
+        RequestConfig config = RequestConfig.custom().setProxy(proxy).build();       
+        httppost.setConfig(config);
+        
+        //设置头
+        //httppost.setHeader("user-agent","mozilla/4.0");
+        //httppost.setHeader("Content-Type", "text/xml; charset=utf-8");
+        //Content-Length,在oracle的utl_http上是必须的，但在httpclient上则异常
+        //httppost.setHeader("Content-Length",String.valueOf(xml.getBytes().length));  
+       
+        StringEntity entity = new StringEntity(xml,"utf-8");
+        httppost.setEntity(entity);   
+        try {
+          CloseableHttpResponse result = httpclient.execute(httppost);
+      String resData = EntityUtils.toString(result.getEntity());  
+      System.out.println(resData);
+      result.close();   
+    } catch (ClientProtocolException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }  
+        try {
+      httpclient.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+}
+
+
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetExaminePhoto1>
+         <!--Optional:-->
+         <tem:plateType>02</tem:plateType>
+         <!--Optional:-->
+         <tem:plateNo>E88888</tem:plateNo>
+      </tem:GetExaminePhoto1>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <soap:Body>
+      <GetExaminePhoto1Response xmlns="http://tempuri.org/">
+         <GetExaminePhoto1Result>http:\\192.168.0.242:8080\VehPhoto\20150626\33\13737_E88888_01.jpg,http:\\192.168.0.242:8080\VehPhoto\20150626\33\13737_E88888_02.jpg,http:\\192.168.0.242:8080\VehPhoto\20150626\33\13737_E88888_06.jpg,http:\\192.168.0.242:8080\VehPhoto\20150626\33\13737_E88888_07.jpg,http:\\192.168.0.242:8080\VehPhoto\20150626\33\13737_E88888_09.jpg</GetExaminePhoto1Result>
+      </GetExaminePhoto1Response>
+   </soap:Body>
+</soap:Envelope>

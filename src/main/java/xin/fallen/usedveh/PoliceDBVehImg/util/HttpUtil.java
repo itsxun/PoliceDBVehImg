@@ -84,21 +84,18 @@ public class HttpUtil {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         //WSDL地址
         HttpPost httppost = new HttpPost(url);
-        httppost.setHeader("user-agent","mozilla/4.0");
+        httppost.setHeader("user-agent", "mozilla/4.0");
         httppost.setHeader("Content-Type", "text/xml; charset=utf-8");
-        StringEntity entity = new StringEntity(reqBody,"utf-8");
+        StringEntity entity = new StringEntity(reqBody, "utf-8");
         httppost.setEntity(entity);
 
         try {
             CloseableHttpResponse result = httpclient.execute(httppost);
-             res = EntityUtils.toString(result.getEntity());
+            res = EntityUtils.toString(result.getEntity());
             result.close();
-        } catch (Exception e) {
-            return "";
-        }
-        try {
             httpclient.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
         return res;
     }
 }

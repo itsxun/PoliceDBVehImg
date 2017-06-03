@@ -51,7 +51,7 @@ public class XlsxWriter {
             font.setBold(true);
             cs.setFont(font);
             c.setCellStyle(cs);
-            c.setCellValue(CompositeColumnZh.zhMap.get(columsName.get(i).toLowerCase()));
+            c.setCellValue(CompositeColumnZh.zhMap.get(columsName.get(i).toUpperCase()));
         }
 
         try {
@@ -69,6 +69,7 @@ public class XlsxWriter {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return wb;
     }

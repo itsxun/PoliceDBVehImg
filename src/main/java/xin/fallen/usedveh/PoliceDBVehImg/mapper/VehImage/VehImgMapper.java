@@ -1,4 +1,4 @@
-package xin.fallen.usedveh.PoliceDBVehImg.mapper;
+package xin.fallen.usedveh.PoliceDBVehImg.mapper.VehImage;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,11 +14,11 @@ import java.util.ArrayList;
  * Usage:
  */
 @Mapper
-public interface VehImgDao {
+public interface VehImgMapper {
 
     @Select("select xh,hpzl,hphm,zp,gxsj from VEH_PICTURE where hpzl=#{hpzl} and hphm=#{hphm}")
     ArrayList<VehImg> selectByHpzlAndHphm(@Param("hpzl") String hpzl, @Param("hphm") String hphm);
 
-    @Select("select * from dual")
-    String ping();
+    @Select("select 2 from dual")
+    String test();
 }

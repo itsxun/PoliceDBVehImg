@@ -3,16 +3,54 @@
 
     <!--####################查询配置####################-->
     <table_name>
-        EXCHANGE_DEPT
+        EXCHANGE_JYDJXX j LEFT JOIN EXCHANGE_FLOW f ON f.JYLSH = j.JYLSH
     </table_name>
 
+    <columns_key>
+        <![CDATA[
+          j.JYLSH                                   AS JYLSH,
+          f.HPHM                                    AS HPHM,
+          j.DJRID1                                  AS DJRID1,
+          DBMS_USEDVEH_UTIL.QUERYUSERNAME(j.DJRID1) AS DJR1,
+          to_char(j.DJRQ1, 'yyyy-mm-dd hh24:mi:ss') AS DJRQ1,
+          DBMS_USEDVEH_UTIL.QUERYUSERGLBM(j.DJRID1) AS DJBM1,
+          j.DJRID2                                  AS DJRID2,
+          DBMS_USEDVEH_UTIL.QUERYUSERNAME(j.DJRID2) AS DJR2,
+          to_char(j.DJRQ2, 'yyyy-mm-dd hh24:mi:ss') AS DJRQ2,
+          DBMS_USEDVEH_UTIL.QUERYUSERGLBM(j.DJRID2) AS DJBM2,
+          j.TJRID                                   AS TJRID,
+          DBMS_USEDVEH_UTIL.QUERYUSERNAME(j.TJRID)  AS TJR,
+          to_char(j.TJRQ, 'yyyy-mm-dd hh24:mi:ss')  AS TJRQ,
+          j.QRRID                                   AS QRRID,
+          DBMS_USEDVEH_UTIL.QUERYUSERNAME(j.QRRID)  AS QRR,
+          to_char(j.QRRQ, 'yyyy-mm-dd hh24:mi:ss')  AS QRRQ,
+          j.SCSHYJ                                  AS SCSHYJ,
+          j.SHRID                                   AS SHRID,
+          DBMS_USEDVEH_UTIL.QUERYUSERNAME(j.SHRID)  AS SHR,
+          to_char(j.SHRQ, 'yyyy-mm-dd hh24:mi:ss')  AS SHRQ,
+          j.SHBM                                    AS SHBM,
+          j.SHYJ                                    AS SHYJ,
+          j.SHCS                                    AS SHCS,
+          j.TBRID                                   AS TBRID,
+          DBMS_USEDVEH_UTIL.QUERYUSERNAME(j.TBRID)  AS TBR,
+          to_char(j.TBRQ, 'yyyy-mm-dd hh24:mi:ss')  AS TBRQ,
+          j.TBYY                                    AS TBYY,
+          j.TBCS                                    AS TBCS,
+          decode(j.SFYJ, '0', '否', '1', '是')        AS SFYJ,
+          j.ZRDHBYQ                                 AS ZRDHBYQ,
+          j.HGZHBYQ                                 AS HGZHBYQ,
+          decode(j.JLZT, '0', '失效', '1', '有效')      AS JLZT,
+          DBMS_USEDVEH_UTIL.QUERYJYZTZH(f.JYZT)     AS JYZT
+        ]]>
+    </columns_key>
+
     <columns_name>
-        GLBM,BMMC,SJBM,BMJB,FZR,SJHM,ZT
+        JYLSH,HPHM,DJRID1,DJR1,DJRQ1,DJBM1,DJRID2,DJR2,DJRQ2,DJBM2,TJRID,TJR,TJRQ,QRRID,QRR,QRRQ,SCSHYJ,SHRID,SHR,SHRQ,SHBM,SHYJ,SHCS,TBRID,TBR,TBRQ,TBYY,TBCS,SFYJ,ZRDHBYQ,HGZHBYQ,JLZT,JYZT
     </columns_name>
 
     <!--主键，或者是要座位查询条件的条件colums-->
     <primary_key>
-        GLBM
+        j.JYLSH
     </primary_key>
 
     <!--excel文件的标题-->
@@ -20,9 +58,13 @@
         综合查询表
     </excel_title>
 
-    <excel_gen_path>
-        C:\Users\itsxu\Desktop\
-    </excel_gen_path>
+    <excel_path_replacement>
+        D:\git\PoliceDBVehImg\build\resources\main\
+    </excel_path_replacement>
+
+    <excel_url_prefix>
+        http://192.168.31.153:8080/
+    </excel_url_prefix>
 
     <wsdl_request_body>
         <![CDATA[

@@ -13,6 +13,9 @@ public class StaticConfig {
     @Alias("table_name")
     public static String TABLENAME;
 
+    @Alias("columns_key")
+    public static String COLUMNSKEY;
+
     @Alias("columns_name")
     public static String COLUMNSNAME;
 
@@ -24,6 +27,12 @@ public class StaticConfig {
 
     @Alias("excel_gen_path")
     public static String EXCELGENPATH;
+
+    @Alias("excel_path_replacement")
+    public static String EXCELGENPATHREPLACEMENT;
+
+    @Alias("excel_url_prefix")
+    public static String EXCELURLPREFIX;
 
     @Alias("wsdl_request_body")
     public static String WSDLREQUESTBODY;

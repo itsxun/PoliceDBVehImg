@@ -10,19 +10,18 @@ import org.apache.ibatis.jdbc.SQL;
  * Usage:
  */
 public class SqlBuilder {
-    public String dynamicSqlBuilder(@Param("columnsName")final String[] columnsName, @Param("tableName") final String tableName,@Param("pks") final String[] primaryKey) {
-        SQL sql = new SQL() {{
-            for (String s : columnsName) {
-                SELECT(s);
-            }
+    public String dynamicSqlBuilder(@Param("columnsName") final String columnsName, @Param("tableName") final String tableName, @Param("pks") final String[] primaryKey) {
+        return new SQL() {{
+            SELECT(columnsName);
             FROM(tableName);
             WHERE(StaticConfig.PRIMARYKEY + " in " + array2String(primaryKey));
-        }};
-        System.out.println("生成的动态SQL为："+sql.toString());
-        return sql.toString();
+        }}.toString();
     }
 
     public static String array2String(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "('20170531100000595')";
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("(");
         for (String s : strs) {

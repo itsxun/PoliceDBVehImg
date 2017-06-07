@@ -20,7 +20,7 @@ public class SqlBuilder {
 
     public static String array2String(String[] strs) {
         if (strs == null || strs.length == 0) {
-            return "('20170531100000595')";
+            return "('20170602100000636','20170606100000639','20170606100000640','20170602100000626','20170602100000627')";
         }
         StringBuilder sb = new StringBuilder();
         sb.append("(");

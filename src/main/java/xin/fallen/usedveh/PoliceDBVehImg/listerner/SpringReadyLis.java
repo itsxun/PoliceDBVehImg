@@ -24,9 +24,9 @@ public class SpringReadyLis implements ApplicationListener<ContextRefreshedEvent
 
     public void onApplicationEvent(ContextRefreshedEvent e) {
         ConfigLoader.load(new File("D:\\git\\PoliceDBVehImg\\src\\main\\resources\\config.xml"), StaticConfig.class);
-//        ConfigLoader.load(FileFinder.find("config.xml"), StaticConfig.class);
+//       ConfigLoader.load(FileFinder.find("config.xml"), StaticConfig.class);
         CompositeColumnZh.zhInit();
-        StaticConfig.objX = BeanBuilder.build(Arrays.asList(StaticConfig.COLUMNSNAME.split(",")));
+//        StaticConfig.objX = BeanBuilder.build(Arrays.asList(StaticConfig.COLUMNSNAME.split(",")));
         log.info("<==========================Config Load Complete==========================>");
     }
 }

@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import xin.fallen.usedveh.PoliceDBVehImg.config.StaticConfig;
 import xin.fallen.usedveh.PoliceDBVehImg.mapper.ExcelExport.CompositeQueryMapper;
@@ -25,7 +26,6 @@ import java.util.UUID;
  * Usage:不写service层了，逻辑堆在controller里面
  */
 @RestController
-@RequestMapping
 public class CompositeQueryCtrl {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
     private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -34,7 +34,8 @@ public class CompositeQueryCtrl {
     private CompositeQueryMapper compositeQueryMapper;
 
     @RequestMapping("/excel-export")
-    public void excelExport(String cellKeys, String[] rowNums, String title, HttpServletResponse resp) {
+    public void excelExport(String cellKeys,  String[] rowNums, String title, HttpServletResponse resp) {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         if (cellKeys == null || cellKeys.length() == 0) {
             cellKeys = StaticConfig.COLUMNSKEY;
         }
@@ -48,16 +49,23 @@ public class CompositeQueryCtrl {
             } catch (IOException e) {
             }
         }
+        resp.setContentType("application/octet-stream");
         resp.setHeader("content-disposition", "attachment;filename=" + UUID.randomUUID().toString() + ".xlsx");
         OutputStream out = null;
         try {
             out = resp.getOutputStream();
             wb.write(out);
+            resp.flushBuffer();
         } catch (Exception e) {
             log.error("excel内容写入文件失败");
             try {
                 resp.getWriter().write("excel写入流失败");
             } catch (IOException e1) {
+            }
+        } finally {
+            try {
+                out.close();
+            } catch (IOException e) {
             }
         }
     }

@@ -17,7 +17,7 @@ import java.util.Properties;
  */
 public class test {
     public static void main(String[] args) throws Exception {
-//        TestBean bean = new TestBean();
+//        foo bean = new foo();
 //        bean.setAge(12);
 //        bean.setName("fucker");
 //

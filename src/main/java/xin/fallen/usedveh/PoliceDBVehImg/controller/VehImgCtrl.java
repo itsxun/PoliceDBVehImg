@@ -1,11 +1,9 @@
 package xin.fallen.usedveh.PoliceDBVehImg.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import xin.fallen.usedveh.PoliceDBVehImg.config.StaticConfig;
 import xin.fallen.usedveh.PoliceDBVehImg.domain.VehImg;
-import xin.fallen.usedveh.PoliceDBVehImg.mapper.ExcelExport.CompositeQueryMapper;
 import xin.fallen.usedveh.PoliceDBVehImg.mapper.VehImage.VehImgMapper;
 import xin.fallen.usedveh.PoliceDBVehImg.util.Base64Util;
 import xin.fallen.usedveh.PoliceDBVehImg.util.HttpUtil;
@@ -13,6 +11,7 @@ import xin.fallen.usedveh.PoliceDBVehImg.util.JsonResultUtil;
 import xin.fallen.usedveh.PoliceDBVehImg.vo.JsonResult;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +26,8 @@ public class VehImgCtrl {
     private VehImgMapper vehImgDao;
 
     @RequestMapping("/veh-examine-pic")
-    public JsonResult getZpByHpzlAndHphm(String hpzl, String hphm) {
+    public JsonResult getZpByHpzlAndHphm(String hpzl, String hphm, HttpServletResponse resp) {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         if (hpzl == null || hphm == null) {
             return JsonResultUtil.resDispatcher("请填写正确的号牌种类和号牌号码", 0);
         }
@@ -41,7 +41,8 @@ public class VehImgCtrl {
     }
 
     @RequestMapping("/police-db-pic")
-    public JsonResult getZpByHpzlAndHphmInPoliceDB(String hpzl, String hphm, String token) {
+    public JsonResult getZpByHpzlAndHphmInPoliceDB(String hpzl, String hphm, HttpServletResponse resp) {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         if (hpzl == null || hphm == null) {
             return JsonResultUtil.resDispatcher("请填写正确的号牌种类和号牌号码", 0);
         }

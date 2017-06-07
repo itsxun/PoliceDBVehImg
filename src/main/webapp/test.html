@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/javascript"> 
+function aaa(){
+    var arry = ['20170602100000636','20170606100000639',];
+    $.ajax({
+        type:'post',
+        url:'/excel-export',
+        traditional: true,
+        data:{
+            rowNums:arry
+        }
+    });
+        } 
+</script>
+<button onclick="aaa()">test</button>
+</body>
+</html>

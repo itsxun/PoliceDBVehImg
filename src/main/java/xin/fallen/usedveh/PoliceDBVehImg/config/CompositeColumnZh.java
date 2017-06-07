@@ -1,10 +1,8 @@
 package xin.fallen.usedveh.PoliceDBVehImg.config;
 
-import xin.fallen.usedveh.PoliceDBVehImg.util.FileFinder;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 /**

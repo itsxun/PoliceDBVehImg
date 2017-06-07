@@ -20,7 +20,4 @@ public interface CompositeQueryMapper {
 
     @SelectProvider(type = SqlBuilder.class, method = "dynamicSqlBuilder")
     List<CompositeQuery> fuzzySelect(@Param("columnsName") String columnsName, @Param("tableName") String tableName, @Param("pks") String[] primaryKeys);
-
-    @Select("select 1 from dual")
-    String test();
 }
